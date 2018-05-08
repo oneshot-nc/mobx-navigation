@@ -55,12 +55,10 @@ export class MobxNavigation extends React.Component<MobxNavigationProps> {
   render() {
     const { children, store, listener } = this.props
 
-    return children(
-      addNavigationHelpers({
-        dispatch: store.dispatch,
-        state: store.navigationState,
-        addListener: listener
-      })
-    )
+    return children({
+      dispatch: store.dispatch,
+      state: store.navigationState,
+      addListener: listener
+    })
   }
 }

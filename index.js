@@ -34,8 +34,6 @@ export class MobxNavigation extends React.Component<MobxNavigationProps> {
     listener: () => {}
   }
 
-  routeIndex = 0;
-
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
   }
@@ -56,19 +54,17 @@ export class MobxNavigation extends React.Component<MobxNavigationProps> {
 
   getCurrentRouteIndex(navigationState) {
     if (!navigationState) {
-      return 0;
+      return false;
     }
-    let routeIndex = navigationState.index;
-    if(routeIndex){
-      this.routeIndex = routeIndex;
-    }
-    const route = navigationState.routes[routeIndex];
+    const route = navigationState.routes[navigationState.index];
     // dive into nested navigators
     if ( route.routes ) {
       return this.getCurrentRouteIndex(route);
     }
-    if(route.params && route.params.type && route.params.type == 'pushStack'){
-      return true;
+    if(route.params && route.params.type){
+      if(route.params.type == 'pushStack' || route.params.type == 'pushTab'){
+        return true;
+      }
     }
     return false;
   }

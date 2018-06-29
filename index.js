@@ -44,12 +44,24 @@ export class MobxNavigation extends React.Component<MobxNavigationProps> {
   onBackPress = (): boolean => {
     const { store } = this.props
 
-    if (store.navigationState.index === 0) {
+    if (this.getCurrentRouteIndex(store.navigationState) === 0) {
       return false
     }
 
     store.dispatch(NavigationActions.back())
     return true
+  }
+
+  getCurrentRouteIndex(navigationState) {
+    if (!navigationState) {
+      return 0;
+    }
+    const route = navigationState.routes[navigationState.index];
+    // dive into nested navigators
+    if (route.routes) {
+      return this.getCurrentRouteIndex(route);
+    }
+    return route.index || 0;
   }
 
   render() {

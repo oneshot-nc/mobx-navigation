@@ -1,6 +1,6 @@
 {
   "name": "mobx-navigation",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "mobx implementation on top of react-navigation for react-native",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "peerDependencies": {
     "react-navigation": "^2.0.0"
-  },  
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:alinz/mobx-navigation.git"
